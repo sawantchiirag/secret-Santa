@@ -12,7 +12,8 @@
     --glass-border: rgba(255,255,255,0.6);
     --text-dark: #1d1d1f;
     --text-muted: #6e6e73;
-    --blue: #007aff;
+    --blue: #0a84ff;
+    --blue-glow: rgba(10,132,255,0.45);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
   }
 
@@ -59,10 +60,30 @@
     -webkit-backdrop-filter: blur(22px);
     box-shadow: 0 8px 28px rgba(0,0,0,0.08);
     transition: transform .2s cubic-bezier(.25,.1,.25,1), box-shadow .2s;
+    position: relative;
   }
   .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 36px rgba(0,0,0,0.10);
+  }
+
+  /* Priority highlight */
+  .priority {
+    border: 2px solid var(--blue);
+    box-shadow: 0 0 18px var(--blue-glow);
+  }
+
+  .priority-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--blue);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 4px 10px var(--blue-glow);
   }
 
   .thumb {
@@ -104,13 +125,14 @@
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
+    box-shadow: 0 4px 12px var(--blue-glow);
   }
 
   footer {
     margin-top: 36px;
     text-align: center;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
   }
 </style>
@@ -126,6 +148,17 @@
 
   <div class="grid">
 
+    <!-- PRIORITY ITEM: PROJECTOR -->
+    <div class="card priority">
+      <div class="priority-badge">⭐ Priority Item</div>
+      <div class="thumb">
+        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/projector.jpg?raw=true" alt="Projector">
+      </div>
+      <div class="title">JIFAR Android 5G WiFi 4K Projector</div>
+      <p class="small-note">Amazon Link</p>
+      <a class="btn" target="_blank" href="https://amzn.in/d/1Ija5k7">View</a>
+    </div>
+
     <!-- Boult GOBOULT Watch -->
     <div class="card">
       <div class="thumb">
@@ -136,17 +169,7 @@
       <a class="btn" target="_blank" href="https://amzn.in/d/bJDbFhE">View</a>
     </div>
 
-    <!-- Jifar Projector -->
-    <div class="card">
-      <div class="thumb">
-        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/projector.jpg?raw=true" alt="Projector">
-      </div>
-      <div class="title">JIFAR Android 5G WiFi 4K Projector</div>
-      <p class="small-note">Amazon Link</p>
-      <a class="btn" target="_blank" href="https://amzn.in/d/1Ija5k7">View</a>
-    </div>
-
-    <!-- Noise Airwave Max 4 Headphones -->
+    <!-- Noise Headphones -->
     <div class="card">
       <div class="thumb">
         <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/61-8u1fXChL._SL1500_.jpg?raw=true" alt="Noise Headphones">
@@ -159,10 +182,9 @@
   </div>
 
   <footer>
-    Out of budget ya stock h toh 2000 Amazon voucher dene.
+    If all are out of budget, you can give a ₹2000 Amazon voucher instead.
   </footer>
 
 </div>
 </body>
 </html>
-
