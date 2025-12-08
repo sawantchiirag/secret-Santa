@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,236 +8,237 @@
 <title>Secret Santa for Asad Sheikh 🎁</title>
 
 <style>
-  :root {
-    --bg: #f5f5f7;
-    --card-bg: rgba(255, 255, 255, 0.70);
-    --glass-border: rgba(255,255,255,0.6);
-    --text-dark: #1d1d1f;
-    --text-muted: #6e6e73;
-    --blue: #007aff;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-  }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    padding: 24px;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: auto;
-  }
-
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-  .header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 10px 0 0;
-    color: var(--text-dark);
-  }
-  .header p {
-    margin-top: 6px;
-    color: var(--text-muted);
-    font-size: 15px;
-  }
-
-  /* Gift Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  /* iOS Cards */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 22px;
-    padding: 18px;
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-  }
-
-  .thumb {
-    width: 100%;
-    height: 200px;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .thumb img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .title {
-    margin: 14px 0 6px;
-    font-weight: 600;
-    font-size: 17px;
-    color: var(--text-dark);
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 10px 16px;
-    background: var(--blue);
-    border-radius: 12px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  /* Popup Overlay */
-  .popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.32);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(6px);
-    z-index: 9999;
-  }
-
-  .popup-box {
-    background: #007aff; /* Blue background */
-    color: white;
-    padding: 26px;
-    width: 80%;
-    max-width: 360px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-    animation: pop .35s ease;
-  }
-
-  @keyframes pop {
-    0% { transform: scale(0.7); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  .popup-btn {
-    margin-top: 18px;
-    padding: 10px 16px;
-    background: white;
-    color: #007aff;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-  }
-
-  /* Snowfall */
-  .snowflake {
-    position: fixed;
-    top: -10px;
-    color: #fff;
-    font-size: 14px;
-    pointer-events: none;
-    animation: fall linear infinite;
-    opacity: 0.9;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
+    :root {
+        --bg: #f5f5f7;
+        --card-bg: rgba(255, 255, 255, 0.70);
+        --glass-border: rgba(255, 255, 255, 0.6);
+        --text-dark: #1d1d1f;
+        --text-muted: #6e6e73;
+        --blue: #007aff;
     }
-  }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        padding: 24px;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 10px 0 0;
+        color: var(--text-dark);
+    }
+
+    .header p {
+        margin-top: 6px;
+        color: var(--text-muted);
+        font-size: 15px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 22px;
+        padding: 18px;
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        transition: transform .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10);
+    }
+
+    .thumb {
+        width: 100%;
+        height: 200px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .thumb img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .title {
+        margin: 14px 0 4px;
+        font-weight: 600;
+        color: var(--text-dark);
+        font-size: 17px;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 14px;
+        padding: 10px 16px;
+        background: var(--blue);
+        border-radius: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    footer {
+        margin-top: 36px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* Blue Page Popup */
+    .popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 122, 255, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+    }
+
+    .popup-box {
+        background: white;
+        padding: 22px;
+        border-radius: 18px;
+        max-width: 320px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    .popup-btn {
+        margin-top: 18px;
+        padding: 10px 16px;
+        background: var(--blue);
+        color: #fff;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* Snowfall */
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1em;
+        z-index: 5;
+        user-select: none;
+        animation-name: snow;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes snow {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    }
 </style>
 </head>
 
 <body>
 
+<!-- Popup #1 -->
 <div id="popup1" class="popup-overlay">
-  <div class="popup-box">
-    <div style="font-size:18px; font-weight:600;">
-      Daam hai toh hi open karna, Secret Santa! 😄🎁
+    <div class="popup-box">
+        Daam hai toh hi open karna, Secret Santa 😭🎁
+        <div class="popup-btn" onclick="nextPopup()">OK</div>
     </div>
-    <div class="popup-btn" onclick="closePopup1()">OK</div>
-  </div>
 </div>
 
+<!-- Popup #2 -->
 <div id="popup2" class="popup-overlay" style="display:none;">
-  <div class="popup-box">
-    <div style="font-size:18px; font-weight:600;">
-      Bhai Santa… mujhe dono hi gifts chahiye.  
-      <br> Please buy both for me. 🎁😄
+    <div class="popup-box">
+        Bhai/Bhen Santa… mujhe dono hi gifts chahiye.  
+        Please buy both for me. 🎁😄
+        <div class="popup-btn" onclick="closePopup()">OK</div>
     </div>
-    <div class="popup-btn" onclick="closePopup2()">OK</div>
-  </div>
 </div>
 
 <div class="container">
 
-  <div class="header">
-    <h1>🎁 Secret Santa Gift List for Asad Sheikh</h1>
-    <p>Santa bhai, list ready hai… ab dekh lo 😄</p>
-  </div>
-
-  <div class="grid">
-
-    <!-- Product 1 -->
-    <div class="card">
-      <div class="thumb">
-        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/head---phone.jpg?raw=true">
-      </div>
-      <div class="title">Headphones</div>
-      <a class="btn" target="_blank" href="https://amzn.in/d/fUQYczn">View</a>
+    <div class="header">
+        <h1>🎁 Secret Santa Gift List for Asad Sheikh</h1>
+        <p>Santa ji, yeh mera wishlist hai 😄</p>
     </div>
 
-    <!-- Product 2 -->
-    <div class="card">
-      <div class="thumb">
-        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/har.jpg?raw=true">
-      </div>
-      <div class="title">Hair Dryer</div>
-      <a class="btn" target="_blank" href="https://amzn.in/d/ho0WOOd">View</a>
+    <div class="grid">
+
+        <!-- Item 1: Headphones -->
+        <div class="card">
+            <div class="thumb">
+                <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/head---phone.jpg?raw=true">
+            </div>
+            <div class="title">Wireless Over-Ear Headphones</div>
+            <a class="btn" href="https://amzn.in/d/fUQYczn" target="_blank">View</a>
+        </div>
+
+        <!-- Item 2: Clothes Steamer -->
+        <div class="card">
+            <div class="thumb">
+                <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/har.jpg?raw=true">
+            </div>
+            <div class="title">Steamer for Clothes</div>
+            <a class="btn" href="https://amzn.in/d/ho0WOOd" target="_blank">View</a>
+        </div>
+
     </div>
 
-  </div>
+    <footer>
+        Santa ji… bas dono gifts de dena ❤️🎁😄
+    </footer>
 
 </div>
 
 <script>
-/* Popup Logic */
-function closePopup1() {
-  document.getElementById("popup1").style.display = "none";
-  document.getElementById("popup2").style.display = "flex";
+/* Popup Control */
+function nextPopup() {
+    document.getElementById("popup1").style.display = "none";
+    document.getElementById("popup2").style.display = "flex";
 }
 
-function closePopup2() {
-  document.getElementById("popup2").style.display = "none";
+function closePopup() {
+    document.getElementById("popup2").style.display = "none";
 }
 
 /* Snowfall */
 for (let i = 0; i < 40; i++) {
-  let snow = document.createElement("div");
-  snow.className = "snowflake";
-  snow.innerHTML = "❄";
-  snow.style.left = Math.random() * 100 + "vw";
-  snow.style.animationDuration = 4 + Math.random() * 6 + "s";
-  snow.style.fontSize = 12 + Math.random() * 12 + "px";
-  document.body.appendChild(snow);
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.innerHTML = "❄";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = (4 + Math.random() * 6) + "s";
+    snow.style.opacity = Math.random();
+    document.body.appendChild(snow);
 }
 </script>
 
