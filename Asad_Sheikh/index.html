@@ -1,246 +1,216 @@
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Secret Santa for Asad Sheikh 🎁</title>
 
 <style>
-    :root {
-        --bg: #f5f5f7;
-        --card-bg: rgba(255, 255, 255, 0.70);
-        --glass-border: rgba(255, 255, 255, 0.6);
-        --text-dark: #1d1d1f;
-        --text-muted: #6e6e73;
-        --blue: #007aff;
-    }
+  :root {
+    --bg: #0d0f15;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --border: rgba(255,255,255,0.15);
+    --text-light: #f5f5f5;
+    --text-muted: #b9b9b9;
+    --blue: #3b82f6;
+    --highlight: rgba(59,130,246,0.25);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  }
 
-    body {
-        margin: 0;
-        background: var(--bg);
-        padding: 24px;
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-        overflow-x: hidden;
-    }
+  body {
+    margin: 0;
+    background: var(--bg);
+    padding: 24px;
+    overflow-x: hidden;
+    position: relative;
+  }
 
-    .container {
-        max-width: 900px;
-        margin: auto;
-    }
+  /* Snow visibility fix (bright flakes + glow) */
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    color: #ffffff;
+    font-size: 22px;
+    opacity: 0.95;
+    text-shadow: 0 0 10px #fff, 0 0 14px #d8d8d8;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh); }
+  }
 
-    .header {
-        text-align: center;
-        margin-bottom: 28px;
-    }
+  /* Light white fog overlay for contrast */
+  .fog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), transparent 70%);
+    z-index: 1;
+  }
 
-    .header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        margin: 10px 0 0;
-        color: var(--text-dark);
-    }
+  .container {
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+  }
 
-    .header p {
-        margin-top: 6px;
-        color: var(--text-muted);
-        font-size: 15px;
-    }
+  .header {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+  .header h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+  }
+  .header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-top: 6px;
+  }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
-    }
+  .grid {
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
 
-    .card {
-        background: var(--card-bg);
-        border: 1px solid var(--glass-border);
-        border-radius: 22px;
-        padding: 18px;
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-        transition: transform .2s, box-shadow .2s;
-    }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    transition: transform .2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+  }
 
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10);
-    }
+  .thumb {
+    width: 100%;
+    height: 200px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
 
-    .thumb {
-        width: 100%;
-        height: 200px;
-        border-radius: 18px;
-        overflow: hidden;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .title {
+    margin: 14px 0 4px;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 17px;
+  }
 
-    .thumb img {
-        max-width: 100%;
-        max-height: 100%;
-    }
+  .highlight {
+    background: var(--highlight);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--blue);
+    display: inline-block;
+    margin-top: 6px;
+  }
 
-    .title {
-        margin: 14px 0 4px;
-        font-weight: 600;
-        color: var(--text-dark);
-        font-size: 17px;
-    }
+  .small-note {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+  }
 
-    .btn {
-        display: inline-block;
-        margin-top: 14px;
-        padding: 10px 16px;
-        background: var(--blue);
-        border-radius: 12px;
-        color: #fff;
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: 600;
-    }
+  .btn {
+    margin-top: 14px;
+    padding: 10px 16px;
+    background: var(--blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+  }
 
-    footer {
-        margin-top: 36px;
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    /* Blue Page Popup */
-    .popup-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 122, 255, 0.85);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-
-    .popup-box {
-        background: white;
-        padding: 22px;
-        border-radius: 18px;
-        max-width: 320px;
-        text-align: center;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-        font-size: 17px;
-        line-height: 1.4;
-    }
-
-    .popup-btn {
-        margin-top: 18px;
-        padding: 10px 16px;
-        background: var(--blue);
-        color: #fff;
-        border-radius: 12px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    /* Snowfall */
-    .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        font-size: 1em;
-        z-index: 5;
-        user-select: none;
-        animation-name: snow;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-
-    @keyframes snow {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
-    }
+  footer {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: 600;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- Popup #1 -->
-<div id="popup1" class="popup-overlay">
-    <div class="popup-box">
-        Daam hai toh hi open karna, Secret Santa 😭🎁
-        <div class="popup-btn" onclick="nextPopup()">OK</div>
-    </div>
-</div>
+<div class="fog"></div>
 
-<!-- Popup #2 -->
-<div id="popup2" class="popup-overlay" style="display:none;">
-    <div class="popup-box">
-        Bhai/Bhen Santa… mujhe dono hi gifts chahiye.  
-        Please buy both for me. 🎁😄
-        <div class="popup-btn" onclick="closePopup()">OK</div>
-    </div>
-</div>
+<!-- Snowflakes -->
+<script>
+  for (let i = 0; i < 50; i++) {
+    let s = document.createElement("div");
+    s.className = "snowflake";
+    s.textContent = "❄";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.animationDuration = 3 + Math.random() * 6 + "s";
+    s.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(s);
+  }
+</script>
 
 <div class="container">
 
-    <div class="header">
-        <h1>🎁 Secret Santa Gift List for Asad Sheikh</h1>
-        <p>Santa ji, yeh mera wishlist hai 😄</p>
+  <div class="header">
+    <h1>🎁 Secret Santa Gift List for Asad Sheikh</h1>
+    <p>Santa ji, yeh mera wishlist hai 😄</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Item 1 -->
+    <div class="card">
+      <div class="thumb">
+        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/51ygf8SX3OL._SX522_-removebg-preview.png?raw=true" alt="Headphones">
+      </div>
+      <div class="title">Wireless Over-Ear Headphones</div>
+      <span class="highlight">Yeh toh chahiye hi chahiye 🔥</span><br>
+      <p class="small-note">Amazon Link</p>
+      <a class="btn" href="https://amzn.in/d/fUQYczn" target="_blank">View</a>
     </div>
 
-    <div class="grid">
-
-        <!-- Item 1: Headphones -->
-        <div class="card">
-            <div class="thumb">
-                <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/head---phone.jpg?raw=true">
-            </div>
-            <div class="title">Wireless Over-Ear Headphones</div>
-            <a class="btn" href="https://amzn.in/d/fUQYczn" target="_blank">View</a>
-        </div>
-
-        <!-- Item 2: Clothes Steamer -->
-        <div class="card">
-            <div class="thumb">
-                <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/har.jpg?raw=true">
-            </div>
-            <div class="title">Steamer for Clothes</div>
-            <a class="btn" href="https://amzn.in/d/ho0WOOd" target="_blank">View</a>
-        </div>
-
+    <!-- Item 2 -->
+    <div class="card">
+      <div class="thumb">
+        <img src="https://github.com/sawantchiirag/sawantchiirag.github.io/blob/main/31dVICt3f9L._SY300_SX300_QL70_FMwebp_-removebg-preview.png?raw=true" alt="Steamer for Clothes">
+      </div>
+      <div class="title">Steamer for Clothes</div>
+      <span class="highlight">Isko bhi pakka chahiye 😎</span><br>
+      <p class="small-note">Amazon Link</p>
+      <a class="btn" href="https://amzn.in/d/ho0WOOd" target="_blank">View</a>
     </div>
 
-    <footer>
-        Santa ji… bas dono gifts de dena ❤️🎁😄
-    </footer>
+  </div>
+
+  <footer>
+    Santa ji… bas dono gifts de dena ❤️🎁😄
+  </footer>
 
 </div>
-
-<script>
-/* Popup Control */
-function nextPopup() {
-    document.getElementById("popup1").style.display = "none";
-    document.getElementById("popup2").style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById("popup2").style.display = "none";
-}
-
-/* Snowfall */
-for (let i = 0; i < 40; i++) {
-    let snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.innerHTML = "❄";
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = (4 + Math.random() * 6) + "s";
-    snow.style.opacity = Math.random();
-    document.body.appendChild(snow);
-}
-</script>
-
 </body>
 </html>
